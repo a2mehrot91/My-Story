@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1424" />
+    <title>My Story — An Unfinished Journey</title>
+    <meta name="description" content="A career story of technology, people leadership, and enduring impact." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #122138;
+        --night: #081321;
+        --navy: #102e4d;
+        --blue: #2f7ed8;
+        --sky: #cfe9ff;
+        --cream: #f7f2ea;
+        --sand: #e9ddca;
+        --coral: #d96c5f;
+        --gold: #d9aa58;
+        --sage: #8daaa2;
+        --muted: #728096;
+        --paper: #fffdf9;
+        --line: rgba(18, 33, 56, .13);
+        --shadow: 0 24px 65px rgba(5, 19, 36, .17);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; background: var(--night); }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--night);
+        font-family: "DM Sans", system-ui, sans-serif;
+        overflow-x: hidden;
+      }
+      a { color: inherit; }
+      ::selection { background: var(--gold); color: var(--night); }
+
+      .progress {
+        position: fixed;
+        z-index: 30;
+        inset: 0 auto auto 0;
+        height: 3px;
+        width: 0;
+        background: linear-gradient(90deg, #e7c486, #d96c5f, #76b2e6);
+        transition: width .12s linear;
+      }
+      .nav {
+        position: fixed;
+        z-index: 20;
+        top: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        width: min(1120px, calc(100% - 36px));
+        padding: 11px 14px 11px 17px;
+        color: #fff;
+        background: rgba(7, 18, 32, .63);
+        border: 1px solid rgba(255, 255, 255, .18);
+        border-radius: 100px;
+        backdrop-filter: blur(18px);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, .12);
+      }
+      .nav-brand { text-decoration: none; font-family: "Playfair Display", serif; font-size: 18px; white-space: nowrap; }
+      .nav-brand span { color: #f2cd91; font-style: italic; }
+      .nav-links { display: flex; align-items: center; gap: 19px; margin-left: auto; }
+      .nav-links a { text-decoration: none; color: rgba(255,255,255,.7); font-size: 11px; font-weight: 600; letter-spacing: .085em; text-transform: uppercase; transition: color .2s; }
+      .nav-links a:hover { color: #fff; }
+      .print { border: 0; border-radius: 100px; padding: 9px 14px; color: var(--night); background: #f2cd91; font: 600 11px "DM Sans", sans-serif; letter-spacing: .075em; text-transform: uppercase; cursor: pointer; }
+
+      .panel {
+        position: relative;
+        min-height: 100svh;
+        overflow: hidden;
+        display: grid;
+        align-items: center;
+        padding: 112px max(7vw, 32px) 64px;
+      }
+      .panel-inner { width: min(1180px, 100%); margin: 0 auto; position: relative; z-index: 2; }
+      .kicker { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 21px; font: 500 11px "DM Mono", monospace; letter-spacing: .11em; text-transform: uppercase; }
+      .kicker::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+      .display { margin: 0; font: 600 clamp(40px, 5vw, 76px)/.98 "Playfair Display", Georgia, serif; letter-spacing: -.055em; }
+      .display em { font-weight: 500; color: var(--coral); }
+      .lede { max-width: 590px; margin: 26px 0 0; font-size: clamp(17px, 1.65vw, 21px); line-height: 1.58; }
+      .eyebrow { color: var(--muted); font: 500 11px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+      .rule { display: block; width: 42px; height: 2px; margin: 25px 0; background: var(--coral); }
+
+      /* Cover */
+      .cover { color: #fff; background: #071323; }
+      .cover::before {
+        content: ""; position: absolute; inset: 0; opacity: .74;
+        background: linear-gradient(90deg, rgba(5,14,28,.96) 0%, rgba(5,14,28,.78) 42%, rgba(5,14,28,.16) 100%),
+          url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=86") center/cover;
+      }
+      .cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 66%, #071323); }
+      .cover-grid { display: grid; grid-template-columns: minmax(0, 680px) 1fr; }
+      .cover .kicker { color: #f2cd91; }
+      .cover .display { font-size: clamp(54px, 8vw, 112px); max-width: 700px; }
+      .cover .display em { color: #f2cd91; }
+      .cover .lede { color: rgba(255,255,255,.76); max-width: 525px; }
+      .cover-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 38px; }
+      .cover-meta span { padding: 8px 11px; border: 1px solid rgba(255,255,255,.22); border-radius: 100px; color: rgba(255,255,255,.76); font: 500 10px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+      .scroll-cue { position: absolute; right: max(7vw,32px); bottom: 36px; z-index: 3; display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.63); font: 500 10px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; writing-mode: vertical-rl; }
+      .scroll-cue::after { content: ""; width: 1px; height: 54px; background: rgba(255,255,255,.45); }
+
+      /* Shared journey pages */
+      .chapter { background: var(--cream); }
+      .chapter::after { content: ""; position: absolute; width: 45vw; height: 45vw; min-width: 560px; min-height: 560px; border-radius: 50%; opacity: .55; pointer-events: none; }
+      .chapter-grid { display: grid; grid-template-columns: minmax(280px, .94fr) minmax(400px, 1.06fr); gap: clamp(42px, 8vw, 120px); align-items: center; }
+      .chapter-copy { max-width: 500px; }
+      .chapter-copy .lede { font-size: 18px; }
+      .story-no { color: var(--blue); font: 500 12px "DM Mono", monospace; letter-spacing: .13em; }
+      .pullquote { margin: 30px 0 0; padding-left: 18px; border-left: 2px solid var(--gold); color: #53647b; font: italic 500 18px/1.48 "Playfair Display", serif; }
+      .visual { position: relative; min-height: 455px; }
+      .photo-card { position: absolute; overflow: hidden; border-radius: 4px; box-shadow: var(--shadow); }
+      .photo-card img { width: 100%; height: 100%; display: block; object-fit: cover; filter: saturate(.82) contrast(1.04); }
+      .photo-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(155deg, rgba(255,255,255,.14), transparent 48%, rgba(7,22,40,.22)); pointer-events: none; }
+      .floating-label { position: absolute; z-index: 2; padding: 11px 13px; color: var(--ink); background: var(--paper); box-shadow: 0 12px 28px rgba(5,19,36,.12); font: 500 10px "DM Mono", monospace; letter-spacing: .065em; text-transform: uppercase; }
+      .floating-label strong { display: block; margin-bottom: 4px; font: 600 25px/1 "Playfair Display", serif; letter-spacing: -.04em; }
+
+      /* Phase 1 */
+      .phase-one::after { right: -18vw; top: -21vw; background: #d8eafa; }
+      .phase-one .kicker { color: #346a9f; }
+      .phase-one .photo-main { width: 76%; height: 390px; right: 0; top: 28px; }
+      .phase-one .photo-small { width: 41%; height: 225px; left: 0; bottom: 0; border: 10px solid var(--cream); }
+      .phase-one .label-one { right: 4%; bottom: -15px; }
+      .wins { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1px; margin-top: 30px; background: var(--line); border: 1px solid var(--line); }
+      .win { padding: 16px; background: rgba(255,255,255,.52); }
+      .win strong { display: block; margin-bottom: 4px; color: var(--navy); font: 600 12px/1.2 "DM Mono", monospace; letter-spacing: .04em; }
+      .win span { color: #5f6d81; font-size: 13px; line-height: 1.34; }
+
+      /* Phase 2 */
+      .phase-two { color: #fff; background: var(--navy); }
+      .phase-two::before { content: ""; position: absolute; inset: 0; opacity: .17; background-image: linear-gradient(rgba(255,255,255,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.25) 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(120deg, transparent 2%, #000 45%, transparent 89%); }
+      .phase-two .display em { color: #f2cd91; }
+      .phase-two .lede { color: rgba(255,255,255,.78); }
+      .phase-two .story-no, .phase-two .kicker { color: #92c9ff; }
+      .phase-two .pullquote { color: #c7dbed; border-color: #f2cd91; }
+      .talent-map { position: relative; min-height: 465px; }
+      .talent-map::before { content: ""; position: absolute; inset: 26px 4px; border: 1px solid rgba(255,255,255,.27); transform: rotate(-4deg); }
+      .talent-map::after { content: ""; position: absolute; width: 66%; height: 76%; right: 2%; top: 6%; background: linear-gradient(135deg, #e5c789, #c77a65); clip-path: polygon(19% 0,100% 0,100% 83%,82% 100%,0 100%,0 16%); opacity: .92; }
+      .talent-photo { position: absolute; z-index: 2; width: 67%; height: 67%; left: 1%; bottom: 2%; overflow: hidden; box-shadow: 20px 22px 0 rgba(5,14,28,.34); }
+      .talent-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.12); mix-blend-mode: multiply; }
+      .talent-card { position: absolute; z-index: 3; right: 0; bottom: 4%; width: 45%; padding: 24px; background: #fbf2e3; color: var(--ink); box-shadow: var(--shadow); }
+      .talent-card small { color: var(--coral); font: 500 10px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+      .talent-card p { margin: 11px 0 0; font: 500 20px/1.22 "Playfair Display", serif; letter-spacing: -.03em; }
+      .talent-points { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-top: 28px; }
+      .talent-points span { padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.82); font-size: 13px; line-height: 1.33; }
+
+      /* Phase 3 */
+      .phase-three { background: #e9ede6; }
+      .phase-three::after { left: -21vw; bottom: -25vw; background: #c8ddd8; }
+      .phase-three .kicker { color: #4f8178; }
+      .phase-three .display em { color: #4f8178; }
+      .critical-stage { position: relative; min-height: 450px; border: 1px solid rgba(19,48,52,.14); background: #dbe6e0; }
+      .critical-stage .red-circle { position: absolute; width: 168px; height: 168px; top: 29px; right: 35px; display: grid; place-items: center; border-radius: 50%; color: white; background: #cf655d; box-shadow: 0 12px 0 rgba(116,58,55,.14); font: 600 36px "Playfair Display", serif; transform: rotate(9deg); }
+      .critical-stage .arrow { position: absolute; z-index: 2; width: 260px; height: 105px; left: 14%; top: 39%; border-bottom: 5px solid #cda050; border-radius: 50%; transform: rotate(-8deg); }
+      .critical-stage .arrow::after { content: ""; position: absolute; right: -2px; bottom: -14px; width: 25px; height: 25px; border-right: 5px solid #cda050; border-bottom: 5px solid #cda050; transform: rotate(-45deg); }
+      .critical-stage .green-circle { position: absolute; width: 168px; height: 168px; left: 29px; bottom: 35px; display: grid; place-items: center; border-radius: 50%; color: white; background: #558b72; box-shadow: 0 12px 0 rgba(40,89,68,.13); font: 600 36px "Playfair Display", serif; transform: rotate(-8deg); }
+      .critical-stage .caption { position: absolute; right: 33px; bottom: 43px; width: 185px; color: #415d57; font: 500 12px/1.45 "DM Mono", monospace; letter-spacing: .04em; text-transform: uppercase; }
+      .time-marker { display: flex; align-items: center; gap: 13px; margin: 30px 0 2px; color: #496f64; font: 500 11px "DM Mono", monospace; letter-spacing: .09em; text-transform: uppercase; }
+      .time-marker strong { color: var(--ink); font-size: 38px; font-family: "Playfair Display", serif; letter-spacing: -.05em; }
+
+      /* Phase 4 */
+      .phase-four { color: #fff; background: #111527; }
+      .phase-four::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 78% 42%, rgba(72,110,198,.42), transparent 18%), radial-gradient(circle at 54% 84%, rgba(217,108,95,.25), transparent 21%); }
+      .phase-four .display em { color: #b4c9ff; }
+      .phase-four .story-no, .phase-four .kicker { color: #a9c7ff; }
+      .phase-four .lede { color: rgba(255,255,255,.76); }
+      .system { position: relative; min-height: 490px; }
+      .system::before, .system::after { content: ""; position: absolute; width: 54%; height: 1px; left: 23%; background: linear-gradient(90deg, transparent, rgba(180,201,255,.62), transparent); transform-origin: left; }
+      .system::before { top: 29%; transform: rotate(31deg); }
+      .system::after { bottom: 28%; transform: rotate(-28deg); }
+      .orbit { position: absolute; border: 1px solid rgba(180,201,255,.38); border-radius: 50%; }
+      .orbit.one { width: 405px; height: 405px; top: 35px; left: 63px; }
+      .orbit.two { width: 285px; height: 285px; top: 94px; left: 123px; }
+      .node { position: absolute; z-index: 2; display: grid; place-items: center; border-radius: 50%; text-align: center; box-shadow: 0 14px 34px rgba(0,0,0,.26); }
+      .node span { display: block; font: 500 9px/1.2 "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+      .node strong { display: block; margin-top: 6px; font: 600 17px/1.05 "Playfair Display", serif; letter-spacing: -.04em; }
+      .node.a { width: 125px; height: 125px; left: 0; top: 18px; background: #f0d096; color: #18203b; }
+      .node.b { width: 160px; height: 160px; right: 0; top: 154px; background: #7f9de9; color: #0f1931; }
+      .node.c { width: 118px; height: 118px; left: 43px; bottom: 17px; background: #d87667; color: #fff; }
+      .node.d { width: 106px; height: 106px; right: 77px; bottom: 10px; background: #e8edf7; color: #16223f; }
+      .node.e { width: 78px; height: 78px; left: 208px; top: 201px; background: #17294e; border: 1px solid #92b3f5; color: #c6d9ff; }
+      .node.e strong { font-size: 14px; }
+      .award-strip { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
+      .award-strip span { padding: 9px 12px; border: 1px solid rgba(255,255,255,.27); border-radius: 100px; color: #d4e2ff; font: 500 10px "DM Mono", monospace; letter-spacing: .06em; text-transform: uppercase; }
+
+      /* Phase 5 */
+      .phase-five { background: #f4eee7; }
+      .phase-five::after { right: -20vw; top: -19vw; background: #f0cfb0; }
+      .phase-five .kicker { color: #a56455; }
+      .phase-five .display em { color: #bb6557; }
+      .care-visual { position: relative; min-height: 475px; }
+      .care-image { position: absolute; width: 74%; height: 390px; left: 0; top: 15px; overflow: hidden; border-radius: 220px 220px 4px 4px; box-shadow: var(--shadow); }
+      .care-image img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.65) sepia(.12); }
+      .care-badge { position: absolute; right: 0; top: 57px; width: 48%; padding: 23px; color: #fff; background: #b96658; box-shadow: 15px 18px 0 #e8d4c3; }
+      .care-badge small { color: #f5d6ad; font: 500 10px "DM Mono", monospace; letter-spacing: .11em; text-transform: uppercase; }
+      .care-badge p { margin: 9px 0 0; font: 500 25px/1.1 "Playfair Display", serif; letter-spacing: -.04em; }
+      .care-notes { position: absolute; right: 1%; bottom: 4px; width: 58%; padding: 18px 20px; background: #fffdf9; border-left: 4px solid #d9aa58; box-shadow: 0 14px 28px rgba(62,37,27,.12); }
+      .care-notes span { display: block; color: #9b5d51; font: 500 10px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+      .care-notes p { margin: 7px 0 0; color: #4a4d55; font-size: 14px; line-height: 1.4; }
+      .initiatives { list-style: none; padding: 0; margin: 29px 0 0; }
+      .initiatives li { position: relative; padding: 10px 0 10px 27px; border-top: 1px solid var(--line); color: #53606e; font-size: 14px; line-height: 1.4; }
+      .initiatives li::before { content: "↗"; position: absolute; left: 1px; color: var(--coral); font-size: 17px; }
+      .initiatives li:last-child { border-bottom: 1px solid var(--line); }
+
+      /* Closing request */
+      .closing { color: #fff; background: #0a1524; }
+      .closing::before { content: ""; position: absolute; inset: 0; background: linear-gradient(114deg, rgba(7,20,34,.93), rgba(7,20,34,.72) 51%, rgba(7,20,34,.9)), url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=2200&q=85") center/cover; filter: saturate(.65); }
+      .closing::after { content: ""; position: absolute; width: 62vw; height: 62vw; min-width: 600px; min-height: 600px; right: -30vw; bottom: -42vw; border: 1px solid rgba(242,205,145,.25); border-radius: 50%; box-shadow: 0 0 0 80px rgba(242,205,145,.035), 0 0 0 160px rgba(242,205,145,.025); }
+      .closing-grid { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(300px,.85fr); gap: clamp(30px, 7vw, 100px); align-items: center; }
+      .closing .kicker { color: #f2cd91; }
+      .closing .display { max-width: 650px; }
+      .closing .display em { color: #f2cd91; }
+      .closing .lede { color: rgba(255,255,255,.81); max-width: 680px; }
+      .request-card { padding: clamp(25px, 3vw, 38px); color: var(--ink); background: #fffcf5; box-shadow: 20px 24px 0 rgba(0,0,0,.14); }
+      .request-card h2 { margin: 0; color: var(--navy); font: 600 clamp(28px, 3vw, 42px)/1.02 "Playfair Display", serif; letter-spacing: -.05em; }
+      .request-card p { margin: 18px 0 0; color: #566477; font-size: 14px; line-height: 1.57; }
+      .request-card strong { color: #213855; }
+      .request-points { list-style: none; padding: 0; margin: 23px 0 0; }
+      .request-points li { position: relative; padding: 13px 0 13px 29px; border-top: 1px solid #dbe0e6; color: #3d4e64; font-size: 14px; line-height: 1.42; }
+      .request-points li::before { content: ""; position: absolute; left: 0; top: 18px; width: 11px; height: 11px; border: 2px solid #d9aa58; border-radius: 50%; }
+      .request-points li:last-child { border-bottom: 1px solid #dbe0e6; }
+      .amount { display: inline-block; margin-top: 17px; padding: 10px 12px; color: #7d4e22; background: #fbefd5; font: 500 11px "DM Mono", monospace; letter-spacing: .045em; text-transform: uppercase; }
+      .attachment-note { margin-top: 14px; color: #7a8798; font-size: 12px; line-height: 1.43; }
+      .attachment-note::before { content: "⌁"; margin-right: 6px; color: var(--coral); font-size: 17px; }
+      .middle { margin-top: 34px; color: #f5d5a7; font: italic 500 clamp(22px, 2.8vw, 39px)/1.18 "Playfair Display", serif; letter-spacing: -.04em; }
+      .signature { margin-top: 29px; color: rgba(255,255,255,.55); font: 500 10px "DM Mono", monospace; letter-spacing: .09em; text-transform: uppercase; }
+
+      .side-index { position: fixed; z-index: 12; top: 50%; right: 22px; display: grid; gap: 9px; transform: translateY(-50%); }
+      .side-index a { width: 7px; height: 7px; border: 1px solid rgba(255,255,255,.75); border-radius: 50%; opacity: .62; transition: transform .2s, background .2s, opacity .2s; }
+      .side-index a.active, .side-index a:hover { transform: scale(1.5); background: #f2cd91; border-color: #f2cd91; opacity: 1; }
+
+      @media (max-width: 800px) {
+        .nav { top: 12px; width: calc(100% - 22px); gap: 10px; padding: 9px 10px 9px 14px; }
+        .nav-links { display: none; }
+        .print { margin-left: auto; padding: 8px 11px; font-size: 10px; }
+        .panel { min-height: auto; padding: 108px 25px 74px; }
+        .cover { min-height: 100svh; }
+        .chapter-grid, .closing-grid { grid-template-columns: 1fr; }
+        .chapter-copy { max-width: 600px; }
+        .visual, .talent-map, .system, .care-visual { min-height: 390px; }
+        .phase-one .photo-main { height: 330px; }
+        .phase-one .photo-small { height: 185px; }
+        .critical-stage { min-height: 390px; }
+        .side-index { display: none; }
+        .scroll-cue { right: 25px; }
+      }
+      @media (max-width: 500px) {
+        .display { font-size: 42px; }
+        .cover .display { font-size: 55px; }
+        .lede { font-size: 16px; }
+        .wins { grid-template-columns: 1fr; }
+        .phase-one .photo-main { width: 82%; height: 290px; }
+        .phase-one .photo-small { width: 47%; height: 160px; border-width: 6px; }
+        .talent-points { grid-template-columns: 1fr; }
+        .talent-card { width: 56%; padding: 16px; }
+        .talent-card p { font-size: 17px; }
+        .critical-stage .red-circle, .critical-stage .green-circle { width: 126px; height: 126px; font-size: 28px; }
+        .critical-stage .caption { right: 17px; bottom: 25px; width: 150px; font-size: 10px; }
+        .critical-stage .arrow { width: 190px; left: 15%; }
+        .orbit.one { width: 310px; height: 310px; left: 9%; }
+        .orbit.two { width: 220px; height: 220px; left: 20%; }
+        .node.a { width: 98px; height: 98px; }
+        .node.b { width: 125px; height: 125px; top: 130px; }
+        .node.c { width: 96px; height: 96px; }
+        .node.d { right: 28px; }
+        .node.e { left: 42%; top: 172px; }
+        .care-image { height: 320px; }
+        .care-badge { top: 38px; width: 53%; padding: 16px; }
+        .care-badge p { font-size: 19px; }
+        .care-notes { width: 69%; padding: 14px; }
+      }
+      @media print {
+        @page { size: landscape; margin: 0; }
+        body { background: #fff; }
+        .nav, .side-index, .progress, .scroll-cue { display: none !important; }
+        .panel { min-height: 100vh; page-break-after: always; break-after: page; padding: 9vh 7vw; }
+        .panel:last-of-type { page-break-after: auto; break-after: auto; }
+        .photo-card img, .talent-photo img, .care-image img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .progress { transition: none; } }
+    </style>
+  </head>
+  <body>
+    <div class="progress" aria-hidden="true"></div>
+    <nav class="nav" aria-label="Story navigation">
+      <a class="nav-brand" href="#opening">My <span>Story</span></a>
+      <div class="nav-links">
+        <a href="#foundations">Foundations</a>
+        <a href="#people">People</a>
+        <a href="#operations">Operations</a>
+        <a href="#delivery">Delivery</a>
+        <a href="#next">Next</a>
+      </div>
+      <button class="print" type="button" onclick="window.print()">Save as PDF</button>
+    </nav>
+
+    <aside class="side-index" aria-label="Page navigation">
+      <a href="#opening" class="active" aria-label="Opening"></a>
+      <a href="#foundations" aria-label="Phase 1"></a>
+      <a href="#people" aria-label="Phase 2"></a>
+      <a href="#operations" aria-label="Phase 3"></a>
+      <a href="#delivery" aria-label="Phase 4"></a>
+      <a href="#careportal" aria-label="Phase 5"></a>
+      <a href="#next" aria-label="The next chapter"></a>
+    </aside>
+
+    <main>
+      <section class="panel cover" id="opening">
+        <div class="panel-inner cover-grid">
+          <div>
+            <p class="kicker">A Hewitt journey · 2004–2026</p>
+            <h1 class="display">My story is built on <em>showing up.</em></h1>
+            <p class="lede">From solving complex client problems to building capable teams, I have kept one promise throughout my Hewitt journey: leave every system, team, and customer stronger than I found them.</p>
+            <div class="cover-meta" aria-label="Story themes">
+              <span>Technology</span><span>People leadership</span><span>Delivery</span><span>Resilience</span>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-cue">Scroll to begin</div>
+      </section>
+
+      <section class="panel chapter phase-one" id="foundations">
+        <div class="panel-inner chapter-grid">
+          <div class="chapter-copy">
+            <p class="kicker">Phase 01 · The foundation</p>
+            <p class="story-no">System Analyst</p>
+            <h2 class="display">Learn fast.<br />Deliver <em>with care.</em></h2>
+            <span class="rule"></span>
+            <p class="lede">I began in operations and technology as a System Analyst—at the intersection of business context, client trust, and reliable delivery. It taught me that a technical answer only matters when it works for the people relying on it.</p>
+            <div class="wins">
+              <div class="win"><strong>01 / 10</strong><span>Selected for the Covansys business-learning cohort in Chennai.</span></div>
+              <div class="win"><strong>Transition</strong><span>Supported the successful transition of clients to Hewitt.</span></div>
+              <div class="win"><strong>United States</strong><span>Trusted onsite to resolve complex, high-impact client issues.</span></div>
+              <div class="win"><strong>Recognition</strong><span>Earned multiple rewards for dependable delivery and ownership.</span></div>
+            </div>
+            <p class="pullquote">“The early years gave me an operating rhythm: understand the business, stay close to the client, and own the outcome.”</p>
+          </div>
+          <div class="visual" aria-label="Visual representation of early career learning and client transition">
+            <div class="photo-card photo-main"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Colleagues collaborating in a bright meeting room" /></div>
+            <div class="photo-card photo-small"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&amp;fit=crop&amp;w=800&amp;q=85" alt="A diverse team gathered around a table" /></div>
+            <div class="floating-label label-one"><strong>10</strong>selected for Chennai</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel phase-two" id="people">
+        <div class="panel-inner chapter-grid">
+          <div class="chapter-copy">
+            <p class="kicker">Phase 02 · The people chapter</p>
+            <p class="story-no">Talent Lead · HR</p>
+            <h2 class="display">A new role revealed a different <em>strength.</em></h2>
+            <span class="rule" style="background:#f2cd91"></span>
+            <p class="lede">After clearing my IJP for Talent Lead, I remained in my existing role for four months while the team worked through my release—even as other opportunities, including a promotion and another US visit, appeared. The wait strengthened my resolve and made the next chapter more meaningful.</p>
+            <div class="talent-points">
+              <span>Trained and groomed multiple new-hire batches.</span>
+              <span>Partnered with leaders to surface and solve their most persistent issues.</span>
+              <span>Revamped RPO practices to optimise colleague hiring.</span>
+              <span>Combined testing and configuration learning; led the first integrated batch independently.</span>
+            </div>
+            <p class="pullquote">“I found my voice in the room—bringing clarity, confidence, and momentum to people learning something new.”</p>
+          </div>
+          <div class="talent-map" aria-label="Visual representation of talent leadership and training">
+            <div class="talent-photo"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="A team in a focused working discussion" /></div>
+            <div class="talent-card"><small>Stakeholder recognition</small><p>Impact that travelled beyond the classroom.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel chapter phase-three" id="operations">
+        <div class="panel-inner chapter-grid">
+          <div class="chapter-copy">
+            <p class="kicker">Phase 03 · The turnaround</p>
+            <p class="story-no">Operations · Critical projects</p>
+            <h2 class="display">Called back when the stakes were <em>highest.</em></h2>
+            <span class="rule" style="background:#4f8178"></span>
+            <p class="lede">Operations brought me back to lead highly visible, business-critical work. The assignment was direct: bring a client in red back to green—with clarity, discipline, and no room for drift.</p>
+            <div class="time-marker"><strong>45</strong> days from red to green</div>
+            <p class="pullquote">“The outcome was a stabilised client relationship and a family dinner voucher—a small, memorable recognition of the work behind the turnaround.”</p>
+          </div>
+          <div class="critical-stage" aria-label="Client health shifted from red to green in 45 days">
+            <div class="red-circle">RED</div>
+            <div class="arrow" aria-hidden="true"></div>
+            <div class="green-circle">GREEN</div>
+            <div class="caption">Focused ownership.<br />Visible progress.<br />Recovered confidence.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel phase-four" id="delivery">
+        <div class="panel-inner chapter-grid">
+          <div class="chapter-copy">
+            <p class="kicker">Phase 04 · Modernising delivery</p>
+            <p class="story-no">PSET · Program &amp; quality leadership</p>
+            <h2 class="display">From a paused programme to a broader <em>portfolio.</em></h2>
+            <span class="rule" style="background:#b4c9ff"></span>
+            <p class="lede">Picked by Gurpreet Sir for CBA Modernization, I stayed focused through changing priorities. When that project stalled, I was entrusted with end-to-end care of CBA Thrive and CBA Reimagine—two programmes delivered with quality and on time.</p>
+            <div class="award-strip">
+              <span>Quality assurance awards</span><span>On-time delivery</span><span>Platinum award</span><span>Promoted to C1</span>
+            </div>
+            <p class="pullquote">“The work expanded—from delivery assurance, to leading Sonika’s Data team, to Optimus Connections and programme-managing Cognos-to-QuickSight reporting. Being promoted to C1 in this new world was especially meaningful: recognition of both the hard work and the smart work behind the outcomes.”</p>
+          </div>
+          <div class="system" aria-label="Connected portfolio of projects">
+            <div class="orbit one" aria-hidden="true"></div><div class="orbit two" aria-hidden="true"></div>
+            <div class="node a"><span>Quality</span><strong>CBA Thrive</strong></div>
+            <div class="node b"><span>Delivery</span><strong>CBA Reimagine</strong></div>
+            <div class="node c"><span>Data</span><strong>Optimus</strong></div>
+            <div class="node d"><span>Reporting</span><strong>QuickSight</strong></div>
+            <div class="node e"><span>Core</span><strong>PSET</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel chapter phase-five" id="careportal">
+        <div class="panel-inner chapter-grid">
+          <div class="chapter-copy">
+            <p class="kicker">Phase 05 · Making quality repeatable</p>
+            <p class="story-no">CarePortal · Technical &amp; delivery leadership</p>
+            <h2 class="display">Settling in—and lifting the system <em>around me.</em></h2>
+            <span class="rule"></span>
+            <p class="lede">I was approached about an opening in CarePortal, interviewed by Mani and the leadership team, and began building a more intentional cadence for quality, learning, and shared ownership.</p>
+            <ul class="initiatives">
+              <li>Helped the F1 team deliver the highest throughput across all teams—without compromising quality or collaboration.</li>
+              <li>Advocated for team members’ recognition, ensuring strong contributions were visible and celebrated.</li>
+              <li>Aligned stress testing to every release—making resilience part of the delivery rhythm.</li>
+              <li>Captured lessons learned for stress testing and partnered with DevOps to prepare an automated script, avoiding additional expense during the environment upgrade.</li>
+              <li>Initiated Communities of Practice to identify opportunities, solve together, and keep improvement visible.</li>
+              <li>Established knowledge-sharing sessions that made expertise easier to access across the team.</li>
+              <li>Kept pace with a rapidly changing technology landscape by building capability in AI tools and technology—evolving from project management toward technical programme management.</li>
+              <li>Regularly shared my personal learning journey and progress with Vikas Dahiya, keeping development intentional and accountable.</li>
+              <li>Invested in personal growth by completing <strong>PRINCE2 Agile</strong> certification and the <strong>PTE</strong> exam, while continuing to learn AI and machine learning.</li>
+            </ul>
+          </div>
+          <div class="care-visual" aria-label="Visual representation of continuing technical and delivery leadership">
+            <div class="care-image"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Colleagues collaborating around a table" /></div>
+            <div class="care-badge"><small>Continuous practice</small><p>Quality is a habit, not a checkpoint.</p></div>
+            <div class="care-notes"><span>From insight to action</span><p>Release resilience · automation · team advocacy · knowledge flow</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel closing" id="next">
+        <div class="panel-inner closing-grid">
+          <div>
+            <p class="kicker">The next chapter</p>
+            <h2 class="display">This is not the end.<br />It is only the <em>middle.</em></h2>
+            <p class="lede">I am deeply grateful for the opportunities, people, and trust that shaped this journey. As I navigate the current layoff, I am asking for support that recognises both the contribution behind this story and the immediate reality in front of my family.</p>
+            <p class="middle">I am ready to keep building—wherever the next opportunity needs me most.</p>
+            <p class="signature">With gratitude and continued commitment</p>
+          </div>
+          <article class="request-card" aria-label="Request for leadership support">
+            <p class="eyebrow">A considered request</p>
+            <h2>Help me bridge this moment with dignity.</h2>
+            <p>I respectfully request consideration for an increased relieving compensation amount. It would help me settle a car lease obligation, where high interest charges have created a significant repayment burden.</p>
+            <div class="amount">Approx. ₹24 lakh settlement request from the lease provider</div>
+            <ul class="request-points">
+              <li>The supporting final settlement sheet from the car lease provider is attached separately for reference.</li>
+              <li>My wife also lost her job this year. I had hoped to be the steady support for our household while she regained her footing.</li>
+              <li>If possible, I would be grateful to be recommended for a suitable opportunity in the operations team now joining Alight—the community where I was previously called on to deliver under pressure.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const progress = document.querySelector('.progress');
+      const indexLinks = [...document.querySelectorAll('.side-index a')];
+      const sections = [...document.querySelectorAll('main > section')];
+      const updateProgress = () => {
+        const maximum = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = `${maximum ? (window.scrollY / maximum) * 100 : 0}%`;
+      };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          indexLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+        });
+      }, { threshold: .52 });
+      sections.forEach((section) => observer.observe(section));
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+    </script>
+  </body>
+</html>
